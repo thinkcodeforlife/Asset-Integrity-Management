@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% block content %}
+        
+    <div class="container">
+
+        <div class="col s4">
+            <img src="{{ url_for('static', filename='plot.png') }}" width=200 height=200 alt="Plot">
+        </div>
+
+        <div class="col s4">
+            <table class="highlight">
+                <thead>
+                    <tr>
+                        <th> Risk Names </th>
+                        <th> Risk Weights </th>
+                        {% for risk_parameter in risk_parameters %}
+                            <th>{{ risk_parameter }}</th>
+                        {% endfor %}
+                    </tr>                    
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th> {{ risks[0] }} </th>
+                        <th> {{ risk_weights[0] }} </th>
+                        {% for r in r1 %}
+                            <th>{{ r }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> {{ risks[1] }} </th>
+                        <th> {{ risk_weights[1] }} </th>
+                        {% for r in r2 %}
+                            <th>{{ r }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> {{ risks[0] }} </th>
+                        <th> Calc -> </th>
+                        {% for score in score_matrix_1 %}
+                            <th>{{ score }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> {{ risks[1] }} </th>
+                        <th> Calc -> </th>
+                        {% for score in score_matrix_2 %}
+                            <th>{{ score }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> Total Risk </th>
+                        <th> 13.200 --> </th>
+                        {% for score in total_scores %}
+                            <th>{{ score }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> Risk ratios </th>
+                        <th> ---> </th>
+                        {% for ratio in total_ratios %}
+                            <th>{{ "%.2f" | format(ratio * 100|int) }}%</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> Current Situation </th>
+                        <th> ---> </th>
+                        {% for parameter_point in parameter_points %}
+                            <th>{{ parameter_point }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th> Final Result </th>
+                        <th> ---> </th>
+                        {% for final_result in final_results %}
+                            <th>{{ "%0.2f" | format(final_result * 100|float) }}%</th>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+
+
+    </div>
+
+{% endblock %}
